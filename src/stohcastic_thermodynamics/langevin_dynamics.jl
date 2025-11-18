@@ -3,8 +3,6 @@ Module for Langevin dynamics simulations.
 """
 module LangevinDynamics
 
-using Plots
-
 # Physical constants - k_B is defined in the main NET module
 # Access k_B from parent module
 k_B = 1.380649e-23  # Boltzmann constant (J/K)

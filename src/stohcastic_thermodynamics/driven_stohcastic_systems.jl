@@ -1,3 +1,8 @@
+"""
+Module for driven stochastic systems.
+"""
+module DrivenStochasticSystems
+
 using Plots
 
 # Manual logging implementation
@@ -85,3 +90,10 @@ function visualize_stochastic_fluxes(J::Array{Float64, 2}, points::Vector, title
     )
     display(p)
 end
+
+# Note: These types and functions are already exported by StochasticOnsagerRelations
+# We don't export them here to avoid ambiguity. Use StochasticOnsagerRelations versions instead.
+# export StochasticOnsagerMatrix, compute_stochastic_fluxes, 
+#        validate_dimensions_stochastic, visualize_stochastic_fluxes
+
+end # module DrivenStochasticSystems

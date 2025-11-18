@@ -7,7 +7,7 @@ using Test
         drift(x) = -x  # Linear drift
         diffusion = 1.0
         
-        potential = calculate_non_equilibrium_potential(grid, drift, diffusion)
+        potential = NET.calculate_non_equilibrium_potential(grid, drift, diffusion)
         
         @test length(potential) == length(grid)
         @test potential[1] == 0.0  # Initial potential
@@ -18,7 +18,7 @@ using Test
         drift(x) = 1.0
         diffusion = 1.0
         
-        potential = calculate_non_equilibrium_potential(grid, drift, diffusion)
+        potential = NET.calculate_non_equilibrium_potential(grid, drift, diffusion)
         
         @test potential[end] > potential[1]  # Should increase
     end
@@ -28,7 +28,7 @@ using Test
         drift(x) = 0.0
         diffusion = 1.0
         
-        potential = calculate_non_equilibrium_potential(grid, drift, diffusion)
+        potential = NET.calculate_non_equilibrium_potential(grid, drift, diffusion)
         
         @test all(potential .== 0.0)  # Should remain zero
     end

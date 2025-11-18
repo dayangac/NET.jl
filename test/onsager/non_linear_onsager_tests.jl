@@ -5,7 +5,7 @@ using Test
     @testset "NonLinearOnsagerMatrix construction" begin
         L = zeros(2, 2, 3)
         L[:, :, 1] = [1.0 0.5; 0.5 2.0]
-        matrix = NonLinearOnsagerMatrix(L)
+        matrix = NET.NonLinearOnsagerMatrix(L)
         @test matrix.L == L
     end
     
@@ -13,11 +13,11 @@ using Test
         L = zeros(2, 2, 2)
         L[:, :, 1] = [1.0 0.0; 0.0 1.0]
         L[:, :, 2] = [1.0 0.0; 0.0 1.0]
-        matrix = NonLinearOnsagerMatrix(L)
+        matrix = NET.NonLinearOnsagerMatrix(L)
         F_linear = [1.0 2.0; 3.0 4.0]
         F_nl = [[0.1 0.2; 0.3 0.4]]
         
-        system = NonLinearFluxSystem(matrix, F_linear, F_nl)
+        system = NET.NonLinearFluxSystem(matrix, F_linear, F_nl)
         @test system.matrix == matrix
         @test system.linear_forces == F_linear
         @test system.nonlinear_forces == F_nl
@@ -27,12 +27,12 @@ using Test
         L = zeros(2, 2, 2)
         L[:, :, 1] = [1.0 0.0; 0.0 1.0]
         L[:, :, 2] = [1.0 0.0; 0.0 1.0]
-        matrix = NonLinearOnsagerMatrix(L)
+        matrix = NET.NonLinearOnsagerMatrix(L)
         F_linear = [1.0 2.0; 3.0 4.0]
         F_nl = [[0.1 0.2; 0.3 0.4]]
-        system = NonLinearFluxSystem(matrix, F_linear, F_nl)
+        system = NET.NonLinearFluxSystem(matrix, F_linear, F_nl)
         
-        J = compute_total_fluxes(system)
+        J = NET.compute_total_fluxes(system)
         @test size(J) == size(F_linear)
         # Linear part: J_linear = F_linear (identity matrix)
         # Nonlinear part: J_nl = F_nl
@@ -44,12 +44,12 @@ using Test
         L = zeros(2, 2, 2)
         L[:, :, 1] = [1.0 0.0; 0.0 1.0]
         L[:, :, 2] = [1.0 0.0; 0.0 1.0]
-        matrix = NonLinearOnsagerMatrix(L)
+        matrix = NET.NonLinearOnsagerMatrix(L)
         F_linear = [1.0 2.0; 3.0 4.0]
         F_nl = [[0.1 0.2; 0.3 0.4]]
-        system = NonLinearFluxSystem(matrix, F_linear, F_nl)
+        system = NET.NonLinearFluxSystem(matrix, F_linear, F_nl)
         
-        @test validate_dimensions_multinonlinear(system) === nothing
+        @test NET.validate_dimensions_multinonlinear(system) === nothing
     end
 end
 

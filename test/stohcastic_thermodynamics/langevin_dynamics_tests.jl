@@ -11,7 +11,7 @@ using Test
         potential(x) = 0.5 * x[1]^2
         grad_potential(x) = [x[1]]
         
-        time, positions, velocities = langevin_dynamics(
+        time, positions, velocities = NET.langevin_dynamics(
             num_steps, dt, gamma, T, mass, potential, grad_potential; dims=1
         )
         
@@ -30,7 +30,7 @@ using Test
         potential(x) = 0.5 * (x[1]^2 + x[2]^2)
         grad_potential(x) = [x[1], x[2]]
         
-        time, positions, velocities = langevin_dynamics(
+        time, positions, velocities = NET.langevin_dynamics(
             num_steps, dt, gamma, T, mass, potential, grad_potential; dims=2
         )
         

@@ -68,6 +68,7 @@ function validate_dimensions_stochastic(L::StochasticOnsagerMatrix, F::Array{Flo
     if size(noise) != (num_vars, num_points)
         throw(DimensionMismatch("Noise dimensions must match the dimensions of F (variables × points)."))
     end
+    return nothing
 end
 
 """

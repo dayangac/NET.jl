@@ -73,6 +73,7 @@ function validate_dimensions(L::OnsagerMatrix, F::Array{Float64, 2})
     else
         throw(ArgumentError("L must be a 2D or 3D array."))
     end
+    return nothing
 end
 
 """

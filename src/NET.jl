@@ -32,6 +32,7 @@ include("stohcastic_thermodynamics/langevin_dynamics.jl")
 include("stohcastic_thermodynamics/noise_induced_bifurications.jl")
 include("stohcastic_thermodynamics/non_equilibrium_potential.jl")
 include("stohcastic_thermodynamics/path_integral_formation.jl")
+include("stohcastic_thermodynamics/driven_stohcastic_systems.jl")
 
 # Physical constants
 export k_B
@@ -57,6 +58,8 @@ using .LangevinDynamics
 using .NoiseInducedBifurications
 using .NonEquilibriumPotential
 using .PathIntegralFormation
+# Note: DrivenStochasticSystems is included but not re-exported to avoid ambiguity
+# with StochasticOnsagerRelations which exports the same types
 
 end # module NET
 

@@ -3,13 +3,29 @@ Module for entropy optimization using gradient descent.
 """
 module EntropyOptimization
 
+# Manual sum function for element-wise multiplication
+function elementwise_multiply_sum(A::Array{Float64, 2}, B::Array{Float64, 2})
+    """Manual implementation of sum(A .* B)"""
+    m, n = size(A)
+    if size(B) != (m, n)
+        throw(DimensionMismatch("A and B must have the same size"))
+    end
+    result = 0.0
+    for i in 1:m
+        for j in 1:n
+            result += A[i, j] * B[i, j]
+        end
+    end
+    return result
+end
+
 """
     compute_entropy(J::Array{Float64, 2}, X::Array{Float64, 2}) -> Float64
 
 Computes the entropy production for given fluxes J and forces X.
 """
 function compute_entropy(J::Array{Float64, 2}, X::Array{Float64, 2})
-    return sum(J .* X)
+    return elementwise_multiply_sum(J, X)
 end
 
 """

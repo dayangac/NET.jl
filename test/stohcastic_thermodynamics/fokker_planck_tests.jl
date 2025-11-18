@@ -8,7 +8,7 @@ using Test
         D = 0.5
         drift(x) = -x  # Simple drift
         
-        P = solve_fokker_planck(x_range, t_range, D, drift)
+        P = NET.solve_fokker_planck(x_range, t_range, D, drift)
         
         @test size(P) == (length(x_range), length(t_range))
         @test all(P .>= 0)  # Probabilities should be non-negative
@@ -22,7 +22,7 @@ using Test
         D = 0.5
         drift(x) = 0.0  # No drift
         
-        P = solve_fokker_planck(x_range, t_range, D, drift)
+        P = NET.solve_fokker_planck(x_range, t_range, D, drift)
         # Initial condition should be Gaussian
         @test P[length(x_range)÷2, 1] > 0  # Center should have probability
     end

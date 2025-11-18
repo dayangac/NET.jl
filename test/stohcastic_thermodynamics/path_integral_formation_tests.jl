@@ -7,7 +7,7 @@ using Test
         drift(x) = -x
         diffusion = 1.0
         
-        action = calculate_action(path, drift, diffusion)
+        action = NET.calculate_action(path, drift, diffusion)
         
         @test action >= 0
         @test isfinite(action)
@@ -18,7 +18,7 @@ using Test
         drift(x) = 0.0
         diffusion = 1.0
         
-        action = calculate_action(path, drift, diffusion)
+        action = NET.calculate_action(path, drift, diffusion)
         
         @test action > 0
     end
@@ -28,7 +28,7 @@ using Test
         drift(x) = 0.0
         diffusion = 1.0
         
-        action = calculate_action(path, drift, diffusion)
+        action = NET.calculate_action(path, drift, diffusion)
         
         @test action >= 0
     end

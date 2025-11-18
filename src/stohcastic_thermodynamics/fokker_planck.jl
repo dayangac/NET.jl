@@ -18,9 +18,9 @@ Solves the Fokker-Planck equation for a given drift field and diffusion coeffici
 - solution::Matrix{Float64}: Probability distribution over space and time.
 """
 function solve_fokker_planck(x_range, t_range, D, drift)
-
-    dx = step(x_range)
-    dt = step(t_range)
+    # Calculate step sizes manually
+    dx = length(x_range) > 1 ? x_range[2] - x_range[1] : 1.0
+    dt = length(t_range) > 1 ? t_range[2] - t_range[1] : 1.0
 
 
     P = zeros(length(x_range), length(t_range))

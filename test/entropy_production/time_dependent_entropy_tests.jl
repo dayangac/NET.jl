@@ -7,7 +7,7 @@ using Test
         X_func(t) = [1.0; 1.0]
         t_span = (0.0, 1.0)
         
-        sol = analyze_time_dependent_entropy_production(J_func, X_func, t_span)
+        sol = NET.analyze_time_dependent_entropy_production(J_func, X_func, t_span)
         
         @test sol isa NET.ODESolver.ODESolution
         @test length(sol.t) > 0
@@ -21,7 +21,7 @@ using Test
         X_func(t) = [1.0; 1.0]
         t_span = (0.0, 1.0)
         
-        sol = analyze_time_dependent_entropy_production(J_func, X_func, t_span)
+        sol = NET.analyze_time_dependent_entropy_production(J_func, X_func, t_span)
         @test sol.u[end] ≈ 2.0 atol=0.1  # Integral of 2 from 0 to 1
     end
 end

@@ -5,7 +5,7 @@ using Test
     @testset "StochasticOnsagerMatrix construction" begin
         L = zeros(2, 2, 3)
         L[:, :, 1] = [1.0 0.5; 0.5 2.0]
-        matrix = StochasticOnsagerMatrix(L)
+        matrix = NET.StochasticOnsagerMatrix(L)
         @test matrix.L == L
     end
     
@@ -13,11 +13,11 @@ using Test
         L = zeros(2, 2, 2)
         L[:, :, 1] = [1.0 0.0; 0.0 1.0]
         L[:, :, 2] = [1.0 0.0; 0.0 1.0]
-        matrix = StochasticOnsagerMatrix(L)
+        matrix = NET.StochasticOnsagerMatrix(L)
         F = [1.0 2.0; 3.0 4.0]
         noise = [0.1 0.2; 0.3 0.4]
         
-        J = compute_stochastic_fluxes(matrix, F, noise)
+        J = NET.compute_stochastic_fluxes(matrix, F, noise)
         @test size(J) == size(F)
         # J = L*F + noise, with identity L
         @test J[:, 1] ≈ [1.1, 3.3] atol=0.01
@@ -28,15 +28,15 @@ using Test
         L = zeros(2, 2, 2)
         L[:, :, 1] = [1.0 0.0; 0.0 1.0]
         L[:, :, 2] = [1.0 0.0; 0.0 1.0]
-        matrix = StochasticOnsagerMatrix(L)
+        matrix = NET.StochasticOnsagerMatrix(L)
         F = [1.0 2.0; 3.0 4.0]
         noise = [0.1 0.2; 0.3 0.4]
         
-        @test validate_dimensions_stochastic(matrix, F, noise) === nothing
+        @test NET.validate_dimensions_stochastic(matrix, F, noise) === nothing
         
-        # Wrong noise dimensions
-        noise_wrong = [0.1; 0.2]
-        @test_throws DimensionMismatch compute_stochastic_fluxes(matrix, F, noise_wrong)
+        # Wrong noise dimensions (1D instead of 2D)
+        noise_wrong = [0.1 0.2]  # Wrong: only 1 row instead of 2
+        @test_throws DimensionMismatch NET.compute_stochastic_fluxes(matrix, F, noise_wrong)
     end
 end
 

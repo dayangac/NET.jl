@@ -5,7 +5,7 @@ using Test
     @testset "TimeDependentOnsagerMatrix construction" begin
         L = zeros(2, 2, 3)
         L[:, :, 1] = [1.0 0.5; 0.5 2.0]
-        matrix = TimeDependentOnsagerMatrix(L)
+        matrix = NET.TimeDependentOnsagerMatrix(L)
         @test matrix.L == L
     end
     
@@ -13,10 +13,10 @@ using Test
         L = zeros(2, 2, 2)
         L[:, :, 1] = [1.0 0.0; 0.0 1.0]
         L[:, :, 2] = [2.0 0.0; 0.0 2.0]
-        matrix = TimeDependentOnsagerMatrix(L)
+        matrix = NET.TimeDependentOnsagerMatrix(L)
         F = [1.0 2.0; 3.0 4.0]
         
-        J = compute_time_dependent_fluxes(matrix, F)
+        J = NET.compute_time_dependent_fluxes(matrix, F)
         @test size(J) == size(F)
         # At t=1: J = [1.0 0.0; 0.0 1.0] * [1.0; 3.0] = [1.0; 3.0]
         @test J[:, 1] ≈ [1.0, 3.0]
@@ -28,10 +28,10 @@ using Test
         L = zeros(2, 2, 2)
         L[:, :, 1] = [1.0 0.0; 0.0 1.0]
         L[:, :, 2] = [1.0 0.0; 0.0 1.0]
-        matrix = TimeDependentOnsagerMatrix(L)
+        matrix = NET.TimeDependentOnsagerMatrix(L)
         F = [1.0 2.0; 3.0 4.0]
         
-        @test validate_dimensions_time_dependent(matrix, F) === nothing
+        @test NET.validate_dimensions_time_dependent(matrix, F) === nothing
     end
 end
 
